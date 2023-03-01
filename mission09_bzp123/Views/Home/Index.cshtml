@@ -1,7 +1,11 @@
 ﻿@{
+    
 }
-@model List<Book>
-@foreach (Book b in Model)
+@model BooksViewModel
+
+
+
+@foreach (Book b in Model.Books)
 {
     <h3>@b.Title</h3>
     
@@ -19,3 +23,6 @@
 
 
 }
+
+<div page-model="@Model.PageInfo" page-action="Index"></div>
+
