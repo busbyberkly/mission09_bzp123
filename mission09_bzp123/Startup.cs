@@ -41,13 +41,30 @@ namespace mission09_bzp123
                 app.UseDeveloperExceptionPage();
             }
             
-            //lets us use the wwwroot folder
+            //lets us use the wwwroot folder.
             app.UseStaticFiles();
             
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                //note: endpoints are executed in-order.
+                endpoints.MapControllerRoute(
+                    "genrepage", 
+                    "{genreType}/Page{pageNum}", 
+                    new { Controller = "Home", action = "Index" });
+                
+                endpoints.MapControllerRoute(
+                    "genre", 
+                    "{genreType}", 
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
+                
+                
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index" });
+
                 endpoints.MapDefaultControllerRoute();
             });
         }
