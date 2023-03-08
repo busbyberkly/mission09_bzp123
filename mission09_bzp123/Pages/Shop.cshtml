@@ -30,8 +30,9 @@
 
     <tfoot>
         <tr>
-            <td colspan="3">Total:</td>
-            <td>@Model.cart.CalculateTotal().ToString("c")</td>
+            <td colspan="3" >Total:</td>
+            @*I added a green border around the total using bootstrap*@
+            <td class="border border-success border-3">@Model.cart.CalculateTotal().ToString("c")</td>
         </tr>
     </tfoot>
 </table>
