@@ -30,7 +30,10 @@ namespace mission09_bzp123.Controllers
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks = 
+                    (bookGenre == null 
+                        ? repo.Books.Count() 
+                        : repo.Books.Where(b => b.Category == bookGenre).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }

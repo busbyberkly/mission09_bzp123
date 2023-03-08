@@ -31,6 +31,11 @@ namespace mission09_bzp123
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
             services.AddScoped<IBookStoreRepository, EFBookStoreRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +48,8 @@ namespace mission09_bzp123
             
             //lets us use the wwwroot folder.
             app.UseStaticFiles();
+
+            app.UseSession();
             
             app.UseRouting();
 
@@ -50,22 +57,23 @@ namespace mission09_bzp123
             {
                 //note: endpoints are executed in-order.
                 endpoints.MapControllerRoute(
-                    "genrepage", 
-                    "{genreType}/Page{pageNum}", 
+                    "genrepage",
+                    "{bookGenre}/Page{pageNum}", 
                     new { Controller = "Home", action = "Index" });
                 
                 endpoints.MapControllerRoute(
-                    "genre", 
-                    "{genreType}", 
-                    new { Controller = "Home", action = "Index", pageNum = 1 });
-                
-                
-                endpoints.MapControllerRoute(
                     name: "Paging",
-                    pattern: "{pageNum}",
-                    defaults: new { Controller = "Home", action = "Index" });
+                    pattern: "Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapControllerRoute(
+                    "genre",
+                    "{bookGenre}", 
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }

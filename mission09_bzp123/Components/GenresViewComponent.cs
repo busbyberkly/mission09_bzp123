@@ -18,6 +18,8 @@ namespace mission09_bzp123.Components
 
         public IViewComponentResult Invoke()
         {
+            ViewBag.SelectedGenre = RouteData?.Values["bookGenre"];
+
             var genres = repo.Books
                 .Select(x => x.Category)
                 .Distinct()
