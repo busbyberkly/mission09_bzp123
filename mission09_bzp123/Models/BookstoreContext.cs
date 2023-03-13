@@ -20,7 +20,7 @@ namespace mission09_bzp123.Models
         }
 
         public DbSet<Book> Books { get; set;}
-
+        public DbSet<Purchase> Purchases { get; set; }
         
     }
 }
