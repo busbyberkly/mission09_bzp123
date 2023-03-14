@@ -10,7 +10,7 @@ namespace mission09_bzp123.Models
     {
         public List<CartLineItem> Items { get; set; } = new List<CartLineItem>();
 
-        public void AddItem (Book bk, int qty)
+        public virtual void AddItem (Book bk, int qty)
         {
             CartLineItem line = Items
                 .Where(b => b.Book.BookId == bk.BookId)
@@ -29,7 +29,14 @@ namespace mission09_bzp123.Models
                 line.Quantity += qty;
             }
 
-
+        }
+        public virtual void RemoveItem (Book bk)
+        {
+            Items.RemoveAll(x => x.Book.BookId == bk.BookId);
+        }
+        public virtual void ClearCart()
+        {
+            Items.Clear();
         }
         public double CalculateTotal()
         {

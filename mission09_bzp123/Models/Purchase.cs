@@ -16,7 +16,7 @@ namespace mission09_bzp123.Models
         [BindNever]
         public ICollection<CartLineItem> Lines { get; set; }
 
-        [Required(ErrorMessage ="Please enter a name:")]
+        [Required(ErrorMessage ="Please enter a name.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage ="Please enter an address in the first address line.")]
